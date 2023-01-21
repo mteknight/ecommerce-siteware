@@ -1,0 +1,241 @@
+[*.cs]
+
+# StyleCop Analyzer
+
+# SA1101: Prefix local calls with this
+dotnet_diagnostic.SA1101.severity=warning
+
+# SA1200: Using directives should be placed correctly
+dotnet_diagnostic.SA1200.severity=none
+
+# SA1633: File should have header
+dotnet_diagnostic.SA1633.severity=silent
+
+# SA1600: Elements should be documented
+dotnet_diagnostic.SA1600.severity=silent
+
+# SA1602: Enumeration items should be documented
+dotnet_diagnostic.SA1602.severity=silent
+
+# SA1604: Element documentation should have summary
+dotnet_diagnostic.SA1604.severity=none
+
+# SA1611: Element parameters should be documented
+dotnet_diagnostic.SA1611.severity=none
+
+# SA1615: Element return value should be documented
+dotnet_diagnostic.SA1615.severity=none
+
+# SA1618: Generic type parameters should be documented
+dotnet_diagnostic.SA1618.severity=none
+
+# SA1204: Static elements should appear before instance elements
+dotnet_diagnostic.SA1204.severity=none
+
+# SA1134: Attributes should not share line
+dotnet_diagnostic.SA1134.severity=none
+
+# SA1202: Elements should be ordered by access
+dotnet_diagnostic.SA1202.severity=none
+
+# SA1313: Parameter names should begin with lower-case letter
+dotnet_diagnostic.SA1313.severity=suggestion
+
+# Roslynator
+
+# RCS1080: Use Count/Length property instead of Any method.
+dotnet_diagnostic.RCS1080.severity=warning
+
+# RCS1139: Add summary element to documentation comment.
+dotnet_diagnostic.RCS1139.severity=none
+
+# Microsoft .NET properties
+csharp_preferred_modifier_order=public, private, protected, internal, new, abstract, virtual, sealed, override, static, readonly, extern, unsafe, volatile, async:suggestion
+csharp_style_var_elsewhere=true:suggestion
+csharp_style_var_for_built_in_types=true:suggestion
+csharp_style_var_when_type_is_apparent=true:suggestion
+dotnet_naming_rule.private_constants_rule.severity=warning
+dotnet_naming_rule.private_constants_rule.style=upper_camel_case_style
+dotnet_naming_rule.private_constants_rule.symbols=private_constants_symbols
+#dotnet_naming_rule.private_instance_fields_rule.severity=warning
+#dotnet_naming_rule.private_instance_fields_rule.style=lower_camel_case_style
+#dotnet_naming_rule.private_static_fields_rule.style=lower_camel_case_style
+#dotnet_naming_rule.private_static_readonly_rule.severity=warning
+#dotnet_naming_rule.private_static_fields_rule.severity=warning
+#dotnet_naming_rule.private_static_readonly_rule.style=lower_camel_case_style
+#dotnet_naming_style.lower_camel_case_style.capitalization=camel_case
+dotnet_naming_style.upper_camel_case_style.capitalization=pascal_case
+dotnet_naming_symbols.private_constants_symbols.applicable_accessibilities=private
+dotnet_naming_symbols.private_constants_symbols.applicable_kinds=field
+dotnet_naming_symbols.private_constants_symbols.required_modifiers=const
+dotnet_style_parentheses_in_arithmetic_binary_operators=never_if_unnecessary:none
+dotnet_style_parentheses_in_other_binary_operators=never_if_unnecessary:none
+dotnet_style_parentheses_in_relational_binary_operators=never_if_unnecessary:none
+dotnet_style_predefined_type_for_locals_parameters_members=true:suggestion
+dotnet_style_predefined_type_for_member_access=true:suggestion
+dotnet_style_qualification_for_event=true:warning
+dotnet_style_qualification_for_field=true:warning
+dotnet_style_qualification_for_method=true:warning
+dotnet_style_qualification_for_property=true:warning
+dotnet_style_require_accessibility_modifiers=for_non_interface_members:suggestion
+
+# ReSharper properties
+resharper_align_linq_query=true
+resharper_align_multline_type_parameter_constrains=true
+resharper_apply_on_completion=true
+resharper_blank_lines_after_control_transfer_statements=1
+resharper_blank_lines_around_single_line_auto_property=1
+resharper_blank_lines_around_single_line_property=1
+resharper_blank_lines_between_using_groups=1
+resharper_csharp_blank_lines_around_single_line_invocable=1
+resharper_csharp_insert_final_newline=true
+resharper_csharp_keep_blank_lines_in_code=1
+resharper_csharp_keep_blank_lines_in_declarations=0
+resharper_csharp_max_line_length=140
+resharper_csharp_new_line_before_while=true
+resharper_csharp_stick_comment=false
+resharper_csharp_wrap_after_declaration_lpar=true
+resharper_csharp_wrap_before_first_type_parameter_constraint=true
+resharper_csharp_wrap_multiple_type_parameter_constraints_style=chop_always
+resharper_csharp_wrap_parameters_style=chop_if_long
+resharper_js_max_line_length=140
+resharper_keep_existing_declaration_block_arrangement=true
+resharper_keep_existing_embedded_block_arrangement=true
+resharper_keep_existing_enum_arrangement=true
+resharper_keep_existing_initializer_arrangement=false
+resharper_max_formal_parameters_on_line=1
+resharper_place_accessorholder_attribute_on_same_line=false
+resharper_place_accessor_attribute_on_same_line=true
+resharper_place_simple_embedded_statement_on_same_line=false
+resharper_prefer_explicit_discard_declaration=true
+resharper_space_after_cast=false
+resharper_space_within_empty_braces=false
+resharper_use_indent_from_vs=false
+resharper_wrap_before_extends_colon=true
+resharper_wrap_chained_binary_expressions=chop_if_long
+
+# ReSharper inspection severities
+resharper_annotate_not_null_parameter_highlighting=warning
+resharper_arrange_redundant_parentheses_highlighting=hint
+resharper_arrange_this_qualifier_highlighting=error
+resharper_arrange_type_member_modifiers_highlighting=hint
+resharper_arrange_type_modifiers_highlighting=hint
+resharper_bad_empty_braces_line_breaks_highlighting=warning
+resharper_built_in_type_reference_style_for_member_access_highlighting=hint
+resharper_built_in_type_reference_style_highlighting=hint
+resharper_function_complexity_overflow_highlighting=warning
+resharper_internal_members_must_have_comments_highlighting=none
+resharper_invalid_xml_doc_comment_highlighting=hint
+resharper_missing_xml_doc_highlighting=hint
+resharper_private_members_must_have_comments_highlighting=none
+resharper_public_members_must_have_comments_highlighting=none
+resharper_suggest_discard_declaration_var_style_highlighting=suggestion
+resharper_suggest_var_or_type_built_in_types_highlighting=hint
+resharper_suggest_var_or_type_elsewhere_highlighting=hint
+resharper_suggest_var_or_type_simple_types_highlighting=hint
+
+#Core editorconfig formatting - indentation
+
+#use soft tabs (spaces) for indentation
+indent_style=space
+
+#Formatting - indentation options
+
+#indent switch case contents.
+csharp_indent_case_contents=true
+#indent switch labels
+csharp_indent_switch_labels = true
+
+#Formatting - new line options
+
+#require braces to be on a new line for methods, control_blocks, types, properties, and accessors (also known as "Allman" style)
+csharp_new_line_before_open_brace=all
+csharp_new_line_before_else = true
+csharp_new_line_before_catch = true
+csharp_new_line_before_finally = true
+csharp_new_line_before_members_in_anonymous_types = true
+csharp_new_line_between_query_expression_clauses = true
+csharp_new_line_before_members_in_object_initializers = true
+
+#Formatting - organize using options
+
+#sort System.* using directives alphabetically, and place them before other usings
+dotnet_sort_system_directives_first=true
+
+#Formatting - spacing options
+
+#require NO space between a cast and the value
+csharp_space_after_cast = false
+#require a space before the colon for bases or interfaces in a type declaration
+csharp_space_after_colon_in_inheritance_clause = true
+#require a space after a keyword in a control flow statement such as a for loop
+csharp_space_after_keywords_in_control_flow_statements = true
+#remove space within empty argument list parentheses
+csharp_space_between_method_call_empty_parameter_list_parentheses = false
+#remove space between method call name and opening parenthesis
+csharp_space_between_method_call_name_and_opening_parenthesis = false
+#do not place space characters after the opening parenthesis and before the closing parenthesis of a method call
+csharp_space_between_method_call_parameter_list_parentheses = false
+#remove space within empty parameter list parentheses for a method declaration
+csharp_space_between_method_declaration_empty_parameter_list_parentheses = false
+#place a space character after the opening parenthesis and before the closing parenthesis of a method declaration parameter list.
+csharp_space_between_method_declaration_parameter_list_parentheses = false
+
+#Formatting - wrapping options
+
+#leave code block on single line
+#leave statements and member declarations on the same line
+csharp_preserve_single_line_statements=true
+
+#Style - Code block preferences
+
+#prefer no curly braces if allowed
+csharp_prefer_braces=true:warning
+
+#Style - expression bodied member options
+
+#prefer expression-bodied members for accessors
+csharp_style_expression_bodied_accessors=true:suggestion
+#prefer block bodies for constructors
+csharp_style_expression_bodied_constructors=false:warning
+#prefer block bodies for methods
+csharp_style_expression_bodied_methods=false:none
+#prefer expression-bodied members for properties
+csharp_style_expression_bodied_properties=true:suggestion
+
+#Style - expression level options
+
+#prefer out variables to be declared before the method call
+csharp_style_inlined_variable_declaration=false:suggestion
+
+#Style - Expression-level  preferences
+
+#prefer default over default(T)
+csharp_prefer_simple_default_expression=true:suggestion
+#prefer objects to not be initialized using object initializers
+dotnet_style_object_initializer=false:suggestion
+
+#Style - Miscellaneous preferences
+
+#prefer local functions over anonymous functions
+csharp_style_pattern_local_over_anonymous_function=true:suggestion
+
+[*.{c,c++,cc,cginc,compute,cp,cpp,cu,cuh,cxx,h,hh,hlsl,hlsli,hlslinc,hpp,hxx,inc,inl,ino,ipp,mpp,proto,tpp,usf,ush}]
+indent_style=tab
+indent_size=tab
+tab_width=4
+
+[*.{asax,ascx,aspx,cs,cshtml,css,htm,html,js,jsx,master,razor,skin,ts,tsx,vb,xaml,xamlx,xoml}]
+indent_style=space
+indent_size=4
+tab_width=4
+
+[*.{appxmanifest,axml,build,config,csproj,dbml,discomap,dtd,json,jsproj,lsproj,njsproj,nuspec,proj,props,resjson,resw,resx,StyleCop,targets,tasks,vbproj,xml,xsd}]
+indent_style=space
+indent_size=2
+tab_width=2
+
+[*.{appxmanifest,asax,ascx,aspx,axml,build,c,c++,cc,cginc,compute,config,cp,cpp,cs,cshtml,csproj,css,cu,cuh,cxx,dbml,discomap,dtd,h,hh,hlsl,hlsli,hlslinc,hpp,htm,html,hxx,inc,inl,ino,ipp,js,json,jsproj,jsx,lsproj,master,mpp,njsproj,nuspec,proj,props,proto,razor,resjson,resw,resx,skin,StyleCop,targets,tasks,tpp,ts,tsx,usf,ush,vb,vbproj,xaml,xamlx,xml,xoml,xsd}]
+indent_style=space
+indent_size=4
+tab_width=4

@@ -1,0 +1,21 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce.Domain.Tests", "Ecommerce.Domain.Tests\Ecommerce.Domain.Tests.csproj", "{70C68534-4395-4729-8606-FDD6C9F9389E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{19A85C75-373F-473B-A20F-9447E8CB6527}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70C68534-4395-4729-8606-FDD6C9F9389E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70C68534-4395-4729-8606-FDD6C9F9389E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70C68534-4395-4729-8606-FDD6C9F9389E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70C68534-4395-4729-8606-FDD6C9F9389E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{70C68534-4395-4729-8606-FDD6C9F9389E} = {19A85C75-373F-473B-A20F-9447E8CB6527}
+	EndGlobalSection
+EndGlobal
