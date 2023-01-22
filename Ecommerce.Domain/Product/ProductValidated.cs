@@ -9,5 +9,10 @@ public sealed record ProductValidated : AggregateValidated<Product>
     {
     }
 
-    public override bool Validate() => !string.IsNullOrWhiteSpace(this.Aggregate?.Name);
+    public override bool Validate()
+    {
+        return !string.IsNullOrWhiteSpace(this.Aggregate?.Name) &&
+               !double.IsPositiveInfinity(this.Aggregate.Price) &&
+               this.Aggregate.Price >= 0;
+    }
 }
