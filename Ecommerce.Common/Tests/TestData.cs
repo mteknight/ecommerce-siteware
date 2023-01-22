@@ -7,14 +7,14 @@ public sealed record TestData : IEnumerable<object[]>
 {
     private TestData(params object[] dataSet)
     {
-        this.Dataset = dataSet;
+        this.Dataset = this.Dataset.Append(dataSet);
     }
 
-    internal IEnumerable<object> Dataset { get; set; } = ArraySegment<object>.Empty;
+    internal IEnumerable<object[]> Dataset { get; set; } = ArraySegment<object[]>.Empty;
 
     public IEnumerator<object[]> GetEnumerator()
     {
-        yield return this.Dataset.ToArray();
+        return this.Dataset.GetEnumerator();
     }
 
     IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();

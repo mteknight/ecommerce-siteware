@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 
+using AutoFixture.Xunit2;
+
 using Dawn;
 
 using Ecommerce.Common.Extensions;
@@ -22,7 +24,7 @@ public sealed record ProductTests
     }
 
     [Theory]
-    [MemberData(nameof(ProductTestData.AddProductTestData), MemberType = typeof(ProductTestData))]
+    [AutoData]
     public void GivenValidProduct_WhenAddingNew_ThenReturnNewProductId(Product product)
     {
         // Act
@@ -37,11 +39,9 @@ internal sealed record ProductTestData
 {
     public static IEnumerable<object[]> AddProductTestData()
     {
-        var product = new Product("test", 4.0);
-
         return TestData
-            .NewSet(product)
-            .NewSet(product);
+            .NewSet(new Product("Product1", 4.0))
+            .NewSet(new Product("Product2", 4.7));
     }
 }
 
