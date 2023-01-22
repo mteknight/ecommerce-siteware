@@ -64,6 +64,11 @@ public sealed record ProductService : IProductService
 
     public Guid Save()
     {
+        var validatedProduct = new ProductValidated(this.product);
+        if (!validatedProduct.IsValid)
+        {
+            return Guid.Empty;
+        }
         return Guid.NewGuid();
     }
 }
