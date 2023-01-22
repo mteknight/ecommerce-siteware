@@ -69,6 +69,6 @@ public sealed record ProductService : IProductService
 {
     public Guid Add(Product product)
     {
-        throw new NotImplementedException();
+        return Guid.NewGuid();
     }
 }
