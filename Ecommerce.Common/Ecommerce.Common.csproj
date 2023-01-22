@@ -13,12 +13,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Dawn.Guard" Version="1.12.0"/>
-        <PackageReference Include="JetBrains.Annotations" Version="2022.3.1"/>
+        <PackageReference Include="Dawn.Guard" Version="1.12.0" />
+        <PackageReference Include="JetBrains.Annotations" Version="2022.3.1" />
         <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.435">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Include="Domain\.Interfaces\IAggregate.cs" />
+      <Compile Include="Domain\.Interfaces\IAggregateRoot.cs" />
+      <Compile Include="Domain\.Interfaces\IValidate.cs" />
     </ItemGroup>
 
 </Project>

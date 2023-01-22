@@ -20,6 +20,6 @@ public static class ServiceCollectionExtensions2
     public static IServiceCollection RegisterDomainDependencies(this IServiceCollection services)
     {
         return services
-            .AddSingleton<IProductService, ProductService>();
+            .AddSingleton<IProductServiceFactory, ProductServiceFactory>();
     }
 }

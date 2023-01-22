@@ -2,8 +2,7 @@ using AutoFixture.Xunit2;
 
 using Dawn;
 
-using Ecommerce.Common.Extensions;
-using Ecommerce.Common.Tests;
+using Ecommerce.Domain.Tests.Product;
 
 using FluentAssertions;
 
@@ -13,19 +12,22 @@ namespace Ecommerce.Domain.Tests;
 
 public sealed record ProductTests
 {
-    private readonly IProductService sut;
+    private readonly IProductServiceFactory sutFactory;
 
-    public ProductTests(IProductService sut)
+    public ProductTests(IProductServiceFactory sutFactory)
     {
-        this.sut = Guard.Argument(sut, nameof(sut)).NotNull().Value;
+        this.sutFactory = Guard.Argument(sutFactory, nameof(sutFactory)).NotNull().Value;
     }
 
     [Theory]
     [AutoData]
-    public void GivenValidProduct_WhenAddingNew_ThenReturnNewProductId(Product product)
+    public void GivenValidProduct_WhenAddingNew_ThenReturnNewProductId(Domain.Product product)
     {
+        // Arrange
+        var sut = this.sutFactory.Create(product);
+        
         // Act
-        var productId = this.sut.Add(product);
+        var productId = sut.Save();
 
         // Assert
         productId.Should().NotBe(Guid.Empty, "The new id is expected when adding a new product.");
@@ -33,54 +35,45 @@ public sealed record ProductTests
 
     [Theory]
     [MemberData(nameof(ProductTestData.InvalidProductTestData), MemberType = typeof(ProductTestData))]
-    public void GivenInvalidProductName_WhenAddingNew_ThenThrowException(Product product)
+    public void GivenInvalidProductName_WhenAddingNew_ThenThrowException(Domain.Product product)
     {
+        // Arrange
+        var sut = this.sutFactory.Create(product); 
+        
         // Act
-        void SutCall() => this.sut.Add(product);
-        Action sutCall = SutCall;
+        var productId = sut.Save();
 
         // Assert
-        sutCall.Should().ThrowExactly<ArgumentNullException>("A product name is expected when adding a new product.");
+        productId.Should().Be(Guid.Empty, "No id should be returned when validation fails.");
     }
-}
-
-internal sealed record ProductTestData
-{
-    public static IEnumerable<object[]> InvalidProductTestData()
-    {
-        return TestData
-            .NewSet(new Product(default, 0))
-            .NewSet(new Product(string.Empty, 0))
-            .NewSet(new Product(StringExtensions.Whitespace, 0));
-    }
-}
-
-public sealed record Product
-{
-    public Product(
-        string name,
-        double price)
-    {
-        this.Name = name;
-        this.Price = price;
-    }
-
-    public Guid Id { get; set; } = Guid.Empty;
-
-    public string Name { get; init; }
-
-    public double Price { get; init; }
 }
 
 public interface IProductService
 {
-    Guid Add(Product product);
+    Guid Save();
 }
 
 public sealed record ProductService : IProductService
 {
-    public Guid Add(Product product)
+    private readonly Domain.Product product;
+
+    public ProductService(Domain.Product product)
+    {
+        this.product = product;
+    }
+
+    public Guid Save()
     {
         return Guid.NewGuid();
     }
+}
+
+public interface IProductServiceFactory
+{
+    IProductService Create(Domain.Product product);
+}
+
+public sealed record ProductServiceFactory : IProductServiceFactory
+{
+    public IProductService Create(Domain.Product product) => new ProductService(product);
 }
