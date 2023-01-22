@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 using Dawn;
 
+using Ecommerce.Common.Extensions;
+using Ecommerce.Common.Tests;
+
 using FluentAssertions;
 
 using Xunit;
@@ -36,10 +39,9 @@ internal sealed record ProductTestData
     {
         var product = new Product("test", 4.0);
 
-        return new List<object[]>
-        {
-            new object[] { product },
-        };
+        return TestData
+            .NewSet(product)
+            .NewSet(product);
     }
 }
 
