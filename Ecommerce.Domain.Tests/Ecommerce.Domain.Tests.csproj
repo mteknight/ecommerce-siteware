@@ -2,8 +2,9 @@
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
-        <IsPackable>false</IsPackable>
+        <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <IsPackable>false</IsPackable>
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
@@ -12,10 +13,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Dawn.Guard" Version="1.12.0" />
-        <PackageReference Include="FluentAssertions" Version="6.9.0" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
-        <PackageReference Include="xunit" Version="2.4.2" />
+        <PackageReference Include="Dawn.Guard" Version="1.12.0"/>
+        <PackageReference Include="FluentAssertions" Version="6.9.0"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1"/>
+        <PackageReference Include="xunit" Version="2.4.2"/>
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
@@ -24,20 +25,15 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="JetBrains.Annotations" Version="2022.3.1" />
-        <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.435">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-        <PackageReference Include="AutoFixture.AutoMoq" Version="4.17.0" />
-        <PackageReference Include="AutoFixture.Xunit2" Version="4.17.0" />
-        <PackageReference Include="Moq" Version="4.18.4" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
-        <PackageReference Include="Xunit.DependencyInjection" Version="8.3.0" />
+        <PackageReference Include="AutoFixture.AutoMoq" Version="4.17.0"/>
+        <PackageReference Include="AutoFixture.Xunit2" Version="4.17.0"/>
+        <PackageReference Include="Moq" Version="4.18.4"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0"/>
+        <PackageReference Include="Xunit.DependencyInjection" Version="8.3.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Ecommerce.Common\Ecommerce.Common.csproj" />
+        <ProjectReference Include="..\Ecommerce.Common\Ecommerce.Common.csproj"/>
     </ItemGroup>
 
 </Project>

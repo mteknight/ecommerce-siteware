@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 using AutoFixture.Xunit2;
 
 using Dawn;
@@ -33,15 +30,28 @@ public sealed record ProductTests
         // Assert
         productId.Should().NotBe(Guid.Empty, "The new id is expected when adding a new product.");
     }
+
+    [Theory]
+    [MemberData(nameof(ProductTestData.InvalidProductTestData), MemberType = typeof(ProductTestData))]
+    public void GivenInvalidProductName_WhenAddingNew_ThenThrowException(Product product)
+    {
+        // Act
+        void SutCall() => this.sut.Add(product);
+        Action sutCall = SutCall;
+
+        // Assert
+        sutCall.Should().ThrowExactly<ArgumentNullException>("A product name is expected when adding a new product.");
+    }
 }
 
 internal sealed record ProductTestData
 {
-    public static IEnumerable<object[]> AddProductTestData()
+    public static IEnumerable<object[]> InvalidProductTestData()
     {
         return TestData
-            .NewSet(new Product("Product1", 4.0))
-            .NewSet(new Product("Product2", 4.7));
+            .NewSet(new Product(default, 0))
+            .NewSet(new Product(string.Empty, 0))
+            .NewSet(new Product(StringExtensions.Whitespace, 0));
     }
 }
 
