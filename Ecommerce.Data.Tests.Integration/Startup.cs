@@ -9,6 +9,6 @@ namespace Ecommerce.Data.Tests.Integration
     [UsedImplicitly]
     public class Startup
     {
-        public virtual void ConfigureServices(IServiceCollection services) => services.RegisterDataTestDependencies();
+        public virtual void ConfigureServices(IServiceCollection services) => services.RegisterDataIntegrationTestDependencies();
     }
 }

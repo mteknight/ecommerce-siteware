@@ -20,9 +20,12 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
+        <Compile Include="Data\.Interfaces\IAggregateDataReaderService.cs"/>
+        <Compile Include="Data\.Interfaces\IAggregateDataWriterService.cs"/>
         <Compile Include="Domain\.Interfaces\IAggregate.cs"/>
         <Compile Include="Domain\.Interfaces\IAggregateReadService.cs"/>
         <Compile Include="Domain\.Interfaces\IAggregateRoot.cs"/>

@@ -1,16 +1,18 @@
 using Dawn;
 
+using Ecommerce.Domain.Tests.Product;
+
 using FluentAssertions;
 
 using Xunit;
 
-namespace Ecommerce.Domain.Tests.Product;
+namespace Ecommerce.Domain.Tests;
 
-public sealed record ProductTests
+public sealed record ProductServiceTests
 {
     private readonly IProductServiceFactory sutFactory;
 
-    public ProductTests(IProductServiceFactory sutFactory)
+    public ProductServiceTests(IProductServiceFactory sutFactory)
     {
         this.sutFactory = Guard.Argument(sutFactory, nameof(sutFactory)).NotNull().Value;
     }
