@@ -2,6 +2,7 @@ using AutoFixture.Xunit2;
 
 using Dawn;
 
+using Ecommerce.Common.Domain;
 using Ecommerce.Domain.Tests.Product;
 
 using FluentAssertions;
@@ -20,7 +21,7 @@ public sealed record ProductTests
     }
 
     [Theory]
-    [AutoData]
+    [MemberData(nameof(ProductTestData.ValidProductTestData), MemberType = typeof(ProductTestData))]
     public void GivenValidProduct_WhenAddingNew_ThenReturnNewProductId(Domain.Product product)
     {
         // Arrange
@@ -30,7 +31,7 @@ public sealed record ProductTests
         var productId = sut.Save();
 
         // Assert
-        productId.Should().NotBe(Guid.Empty, "The new id is expected when adding a new product.");
+        productId.Should().NotBe(Guid.Empty, "The new id is expected when adding a new product");
     }
 
     [Theory]
@@ -44,13 +45,13 @@ public sealed record ProductTests
         var productId = sut.Save();
 
         // Assert
-        sut.ValidatedAggregate.IsValid.Should().BeFalse("Expected to be false when validation fails.");
-        productId.Should().Be(Guid.Empty, "No id should be returned when validation fails.");
+        sut.ValidatedAggregate.IsValid.Should().BeFalse("Expected to be false when validation fails");
+        productId.Should().Be(Guid.Empty, "No id should be returned when validation fails");
     }
     
     [Theory]
     [MemberData(nameof(ProductTestData.ValidProductTestData), MemberType = typeof(ProductTestData))]
-    public void GivenProductDiscount_WhenAddingNew_ThenReturnNewProductId(Domain.Product product)
+    public void GivenProductDiscount_WhenAddingNew_ThenReturnNewProductWithNoPromotion(Domain.Product product)
     {
         // Arrange
         var sut = this.sutFactory.Create(product); 
@@ -59,7 +60,22 @@ public sealed record ProductTests
         var productId = sut.Save();
 
         // Assert
-        product.Promotion.Should().NotBeNull("At least the default promotion (NoPromotion) is expected.");
-        productId.Should().NotBeEmpty("The new id is expected when adding a new product.");
+        product.Promotion.Should().NotBeNull("At least the default promotion (NoPromotion) is expected");
+        productId.Should().NotBeEmpty("The new id is expected when adding a new product");
+    }
+
+    [Theory]
+    [MemberData(nameof(ProductTestData.ProductWithoutPromotionTestData), MemberType = typeof(ProductTestData))]
+    public void GivenProductWithoutPromotion_WhenAddingNew_ThenReturnNewProductWithNoPromotion(Domain.Product product)
+    {
+        // Arrange
+        var sut = this.sutFactory.Create(product); 
+        
+        // Act
+        var productId = sut.Save();
+
+        // Assert
+        product.Promotion.Should().BeOfType(typeof(NoPromotion), "The default promotion (NoPromotion) is expected");
+        productId.Should().NotBeEmpty("The new id is expected when adding a new product");
     }
 }

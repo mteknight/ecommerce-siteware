@@ -4,6 +4,8 @@ namespace Ecommerce.Domain;
 
 public sealed record Product : IAggregateRoot<Product>
 {
+    private IPromotion promotion = new NoPromotion();
+
     public Product(
         string name,
         decimal price)
@@ -18,7 +20,12 @@ public sealed record Product : IAggregateRoot<Product>
 
     public decimal Price { get; init; }
 
-    public IPromotion Promotion { get; set; } = new NoPromotion();
+    public IPromotion Promotion
+    {
+        get => this.promotion;
+        // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
+        set => this.promotion = value ?? new NoPromotion();
+    }
 }
 
 public interface IPromotion

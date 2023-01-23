@@ -31,4 +31,13 @@ internal sealed record ProductTestData
                 .NewSet(new Domain.Product(fixture.Create<string>(), fixture.Create<decimal>()) { Promotion = new ThreeForTen() })
             ;
     }
+
+    public static IEnumerable<object[]> ProductWithoutPromotionTestData()
+    {
+        var fixture = new Fixture();
+
+        return TestData
+                .NewSet(new Domain.Product(fixture.Create<string>(), fixture.Create<decimal>()) { Promotion = default })
+            ;
+    }
 }
