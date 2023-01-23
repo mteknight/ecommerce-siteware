@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Ecommerce.Domain.Configurations;
 
-public static class ServiceCollectionExtensions2
+public static class ServiceCollectionExtensions
 {
     [UsedImplicitly]
     public static IServiceCollection RegisterDomainDependencies(this IServiceCollection services)

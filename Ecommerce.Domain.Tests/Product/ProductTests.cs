@@ -1,15 +1,10 @@
-using AutoFixture.Xunit2;
-
 using Dawn;
-
-using Ecommerce.Common.Domain;
-using Ecommerce.Domain.Tests.Product;
 
 using FluentAssertions;
 
 using Xunit;
 
-namespace Ecommerce.Domain.Tests;
+namespace Ecommerce.Domain.Tests.Product;
 
 public sealed record ProductTests
 {
@@ -48,7 +43,7 @@ public sealed record ProductTests
         sut.ValidatedAggregate.IsValid.Should().BeFalse("Expected to be false when validation fails");
         productId.Should().Be(Guid.Empty, "No id should be returned when validation fails");
     }
-    
+
     [Theory]
     [MemberData(nameof(ProductTestData.ValidProductTestData), MemberType = typeof(ProductTestData))]
     public void GivenProductDiscount_WhenAddingNew_ThenReturnNewProductWithNoPromotion(Domain.Product product)

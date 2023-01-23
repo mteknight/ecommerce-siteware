@@ -5,7 +5,7 @@ using Ecommerce.Common.Tests;
 
 namespace Ecommerce.Domain.Tests.Product;
 
-internal sealed record ProductTestData
+public sealed record ProductTestData
 {
     public static IEnumerable<object[]> InvalidProductTestData()
     {
@@ -26,9 +26,9 @@ internal sealed record ProductTestData
         var fixture = new Fixture();
 
         return TestData
-                .NewSet(new Domain.Product(fixture.Create<string>(), fixture.Create<decimal>()) { Promotion = new NoPromotion() })
-                .NewSet(new Domain.Product(fixture.Create<string>(), fixture.Create<decimal>()) { Promotion = new TwoForOne() })
-                .NewSet(new Domain.Product(fixture.Create<string>(), fixture.Create<decimal>()) { Promotion = new ThreeForTen() })
+                .NewSet(new Domain.Product(fixture.Create<string>(), fixture.Create<decimal>()) { PromotionType = IPromotion.PromotionType.NoPromotion })
+                .NewSet(new Domain.Product(fixture.Create<string>(), fixture.Create<decimal>()) { PromotionType = IPromotion.PromotionType.NoPromotion })
+                .NewSet(new Domain.Product(fixture.Create<string>(), fixture.Create<decimal>()) { PromotionType = IPromotion.PromotionType.NoPromotion })
             ;
     }
 
@@ -37,7 +37,7 @@ internal sealed record ProductTestData
         var fixture = new Fixture();
 
         return TestData
-                .NewSet(new Domain.Product(fixture.Create<string>(), fixture.Create<decimal>()) { Promotion = default })
+                .NewSet(new Domain.Product(fixture.Create<string>(), fixture.Create<decimal>()))
             ;
     }
 }

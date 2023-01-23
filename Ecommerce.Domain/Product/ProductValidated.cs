@@ -4,7 +4,7 @@ namespace Ecommerce.Domain;
 
 public sealed class ProductValidated : AggregateValidated<Product>
 {
-    internal ProductValidated(Product aggregate) 
+    public ProductValidated(Product aggregate) 
         : base(aggregate)
     {
     }
