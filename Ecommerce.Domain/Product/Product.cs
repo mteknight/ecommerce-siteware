@@ -6,7 +6,7 @@ public sealed record Product : IAggregateRoot<Product>
 {
     public Product(
         string name,
-        double price)
+        decimal price)
     {
         this.Name = name;
         this.Price = price;
@@ -16,5 +16,5 @@ public sealed record Product : IAggregateRoot<Product>
 
     public string Name { get; init; }
 
-    public double Price { get; init; }
+    public decimal Price { get; init; }
 }

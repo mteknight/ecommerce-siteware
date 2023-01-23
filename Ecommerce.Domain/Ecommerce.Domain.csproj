@@ -10,4 +10,12 @@
       <ProjectReference Include="..\Ecommerce.Common\Ecommerce.Common.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Include="Product\.Interfaces\IProductServiceFactory.cs" />
+    </ItemGroup>
+
 </Project>

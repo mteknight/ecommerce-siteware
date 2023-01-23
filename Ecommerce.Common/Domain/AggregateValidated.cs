@@ -1,27 +1,29 @@
-﻿namespace Ecommerce.Common.Domain;
+﻿using System.Diagnostics.Contracts;
 
-public abstract record AggregateValidated<TAggregate> : IValidate<TAggregate>
+namespace Ecommerce.Common.Domain;
+
+public abstract class AggregateValidated<TAggregate> : IValidate<TAggregate>
     where TAggregate : class, IAggregate<TAggregate>
 {
+    private readonly TAggregate aggregate;
+
     protected AggregateValidated(TAggregate aggregate)
     {
-        this.Set(aggregate);
+        // ReSharper disable once VirtualMemberCallInConstructor => Made safe.
+        this.IsValid = this.Validate(aggregate);
+        this.aggregate = aggregate;
     }
 
-    protected TAggregate? Aggregate { get; private set; }
-
-    public bool IsValid { get; private set; }
+    public bool IsValid { get; }
 
     public static implicit operator TAggregate(AggregateValidated<TAggregate> validatedAggregate)
     {
-        return validatedAggregate.Aggregate!;
+        return validatedAggregate.aggregate;
     }
 
-    public abstract bool Validate();
+    [Pure]
+    public bool Validate() => this.Validate(this.aggregate);
 
-    public void Set(TAggregate aggregate)
-    {
-        this.Aggregate = aggregate;
-        this.IsValid = this.Validate();
-    }
+    [Pure]
+    protected abstract bool Validate(TAggregate? aggregate);
 }

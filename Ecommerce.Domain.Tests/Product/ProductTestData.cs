@@ -12,16 +12,12 @@ internal sealed record ProductTestData
         var fixture = new Fixture();
 
         return TestData
-            .NewSet(new Domain.Product(default, fixture.Create<double>()))
-            .NewSet(new Domain.Product(string.Empty, fixture.Create<double>()))
-            .NewSet(new Domain.Product(StringExtensions.Whitespace, fixture.Create<double>()))
-            .NewSet(new Domain.Product(fixture.Create<string>(), double.NaN))
-            .NewSet(new Domain.Product(fixture.Create<string>(), double.PositiveInfinity))
-            .NewSet(new Domain.Product(fixture.Create<string>(), double.NegativeInfinity))
+            .NewSet(new Domain.Product(default!, fixture.Create<decimal>()))
+            .NewSet(new Domain.Product(string.Empty, fixture.Create<decimal>()))
+            .NewSet(new Domain.Product(StringExtensions.Whitespace, fixture.Create<decimal>()))
             .NewSet(new Domain.Product(fixture.Create<string>(), -1))
-            .NewSet(new Domain.Product(fixture.Create<string>(), -43.765))
-            .NewSet(new Domain.Product(fixture.Create<string>(), double.MinValue))
+            .NewSet(new Domain.Product(fixture.Create<string>(), -43.765m))
+            .NewSet(new Domain.Product(fixture.Create<string>(), decimal.MinValue))
             ;
-
     }
 }

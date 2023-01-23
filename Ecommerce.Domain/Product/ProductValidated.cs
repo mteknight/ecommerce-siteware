@@ -2,17 +2,16 @@
 
 namespace Ecommerce.Domain;
 
-public sealed record ProductValidated : AggregateValidated<Product>
+public sealed class ProductValidated : AggregateValidated<Product>
 {
-    public ProductValidated(Product aggregate) 
+    internal ProductValidated(Product aggregate) 
         : base(aggregate)
     {
     }
 
-    public override bool Validate()
+    protected override bool Validate(Product? aggregate)
     {
-        return !string.IsNullOrWhiteSpace(this.Aggregate?.Name) &&
-               !double.IsPositiveInfinity(this.Aggregate.Price) &&
-               this.Aggregate.Price >= 0;
+        return !string.IsNullOrWhiteSpace(aggregate?.Name) &&
+               aggregate.Price >= 0;
     }
 }

@@ -23,7 +23,11 @@
 
     <ItemGroup>
       <Compile Include="Domain\.Interfaces\IAggregate.cs" />
+      <Compile Include="Domain\.Interfaces\IAggregateReadService.cs" />
       <Compile Include="Domain\.Interfaces\IAggregateRoot.cs" />
+      <Compile Include="Domain\.Interfaces\IAggregateServiceFactory.cs" />
+      <Compile Include="Domain\.Interfaces\IAggregateWriterService.cs" />
+      <Compile Include="Domain\.Interfaces\IAggregateWriterServiceFactory.cs" />
       <Compile Include="Domain\.Interfaces\IValidate.cs" />
     </ItemGroup>
 

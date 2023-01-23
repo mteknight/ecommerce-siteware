@@ -35,7 +35,7 @@ public sealed record ProductTests
 
     [Theory]
     [MemberData(nameof(ProductTestData.InvalidProductTestData), MemberType = typeof(ProductTestData))]
-    public void GivenInvalidProductName_WhenAddingNew_ThenThrowException(Domain.Product product)
+    public void GivenInvalidProductName_WhenAddingNew_ThenSetInvalidAndReturnEmptyId(Domain.Product product)
     {
         // Arrange
         var sut = this.sutFactory.Create(product); 
@@ -44,41 +44,7 @@ public sealed record ProductTests
         var productId = sut.Save();
 
         // Assert
+        sut.ValidatedAggregate.IsValid.Should().BeFalse("Expected to be false when validation fails.");
         productId.Should().Be(Guid.Empty, "No id should be returned when validation fails.");
     }
-}
-
-public interface IProductService
-{
-    Guid Save();
-}
-
-public sealed record ProductService : IProductService
-{
-    private readonly Domain.Product product;
-
-    public ProductService(Domain.Product product)
-    {
-        this.product = product;
-    }
-
-    public Guid Save()
-    {
-        var validatedProduct = new ProductValidated(this.product);
-        if (!validatedProduct.IsValid)
-        {
-            return Guid.Empty;
-        }
-        return Guid.NewGuid();
-    }
-}
-
-public interface IProductServiceFactory
-{
-    IProductService Create(Domain.Product product);
-}
-
-public sealed record ProductServiceFactory : IProductServiceFactory
-{
-    public IProductService Create(Domain.Product product) => new ProductService(product);
 }
