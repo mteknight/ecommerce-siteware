@@ -17,4 +17,48 @@ public sealed record Product : IAggregateRoot<Product>
     public string Name { get; init; }
 
     public decimal Price { get; init; }
+
+    public IPromotion Promotion { get; set; } = new NoPromotion();
+}
+
+public interface IPromotion
+{
+    decimal CalculatePrice(
+        int quantity, 
+        decimal unitPrice);
+}
+
+public sealed record NoPromotion : IPromotion 
+{
+    public decimal CalculatePrice(
+        int quantity, 
+        decimal unitPrice)  
+    {
+        throw new NotImplementedException();
+    }
+
+    public override string ToString() => string.Empty;
+}
+
+public sealed record TwoForOne : IPromotion 
+{
+    public decimal CalculatePrice(
+        int quantity, 
+        decimal unitPrice) 
+    {
+        throw new NotImplementedException();
+    }
+
+    public override string ToString() => "Leve 2, Pague 1";
+}
+
+public sealed record ThreeForTen : IPromotion {
+    public decimal CalculatePrice(
+        int quantity, 
+        decimal unitPrice)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override string ToString() => "3 por 10 reais";
 }

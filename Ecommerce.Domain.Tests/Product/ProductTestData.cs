@@ -12,12 +12,23 @@ internal sealed record ProductTestData
         var fixture = new Fixture();
 
         return TestData
-            .NewSet(new Domain.Product(default!, fixture.Create<decimal>()))
-            .NewSet(new Domain.Product(string.Empty, fixture.Create<decimal>()))
-            .NewSet(new Domain.Product(StringExtensions.Whitespace, fixture.Create<decimal>()))
-            .NewSet(new Domain.Product(fixture.Create<string>(), -1))
-            .NewSet(new Domain.Product(fixture.Create<string>(), -43.765m))
-            .NewSet(new Domain.Product(fixture.Create<string>(), decimal.MinValue))
+                .NewSet(new Domain.Product(default!, fixture.Create<decimal>()))
+                .NewSet(new Domain.Product(string.Empty, fixture.Create<decimal>()))
+                .NewSet(new Domain.Product(StringExtensions.Whitespace, fixture.Create<decimal>()))
+                .NewSet(new Domain.Product(fixture.Create<string>(), -1))
+                .NewSet(new Domain.Product(fixture.Create<string>(), -43.765m))
+                .NewSet(new Domain.Product(fixture.Create<string>(), decimal.MinValue))
+            ;
+    }
+
+    public static IEnumerable<object[]> ValidProductTestData()
+    {
+        var fixture = new Fixture();
+
+        return TestData
+                .NewSet(new Domain.Product(fixture.Create<string>(), fixture.Create<decimal>()) { Promotion = new NoPromotion() })
+                .NewSet(new Domain.Product(fixture.Create<string>(), fixture.Create<decimal>()) { Promotion = new TwoForOne() })
+                .NewSet(new Domain.Product(fixture.Create<string>(), fixture.Create<decimal>()) { Promotion = new ThreeForTen() })
             ;
     }
 }

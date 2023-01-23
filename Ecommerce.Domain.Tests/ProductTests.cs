@@ -47,4 +47,19 @@ public sealed record ProductTests
         sut.ValidatedAggregate.IsValid.Should().BeFalse("Expected to be false when validation fails.");
         productId.Should().Be(Guid.Empty, "No id should be returned when validation fails.");
     }
+    
+    [Theory]
+    [MemberData(nameof(ProductTestData.ValidProductTestData), MemberType = typeof(ProductTestData))]
+    public void GivenProductDiscount_WhenAddingNew_ThenReturnNewProductId(Domain.Product product)
+    {
+        // Arrange
+        var sut = this.sutFactory.Create(product); 
+        
+        // Act
+        var productId = sut.Save();
+
+        // Assert
+        product.Promotion.Should().NotBeNull("At least the default promotion (NoPromotion) is expected.");
+        productId.Should().NotBeEmpty("The new id is expected when adding a new product.");
+    }
 }
