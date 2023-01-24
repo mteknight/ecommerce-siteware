@@ -2,7 +2,6 @@
 
 using Ecommerce.Common.Data;
 using Ecommerce.Domain;
-using Ecommerce.Domain.Tests.Product;
 
 using FluentAssertions;
 

@@ -1,15 +1,26 @@
-﻿using JetBrains.Annotations;
+﻿using Dawn;
+
+using Ecommerce.Common.Data;
+
+using JetBrains.Annotations;
 
 namespace Ecommerce.Common.Domain;
 
 [UsedImplicitly]
-public sealed record AggregateWriterServiceFactory<TAggregateRoot, TAggregateValidated>
+public record AggregateWriterServiceFactory<TAggregateRoot, TAggregateValidated>
     : IAggregateWriterServiceFactory<TAggregateRoot, TAggregateValidated>
     where TAggregateRoot : class, IAggregateRoot<TAggregateRoot>
     where TAggregateValidated : AggregateValidated<TAggregateRoot>
 {
-    public IAggregateWriterService<TAggregateRoot, TAggregateValidated> Create(TAggregateValidated validatedAggregate)
+    private readonly IAggregateDataWriterService<TAggregateRoot, TAggregateValidated> dataWriterService;
+
+    public AggregateWriterServiceFactory(IAggregateDataWriterService<TAggregateRoot, TAggregateValidated> dataWriterService)
     {
-        return new AggregateWriterService<TAggregateRoot, TAggregateValidated>(validatedAggregate);
+        this.dataWriterService = Guard.Argument(dataWriterService, nameof(dataWriterService)).NotNull().Value;
+    }
+
+    public virtual IAggregateWriterService<TAggregateRoot, TAggregateValidated> Create(TAggregateValidated validatedAggregate)
+    {
+        return new AggregateWriterService<TAggregateRoot, TAggregateValidated>(validatedAggregate, this.dataWriterService);
     }
 }

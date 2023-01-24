@@ -2,5 +2,5 @@
 
 namespace Ecommerce.Domain;
 
-public interface IProductServiceFactory : IAggregateServiceFactory<Product, ProductValidated>
+public interface IProductServiceFactory : IAggregateRootServiceFactory<IProductService, Product>
 {}

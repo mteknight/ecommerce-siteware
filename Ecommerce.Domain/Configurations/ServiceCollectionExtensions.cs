@@ -1,4 +1,5 @@
 ﻿using Ecommerce.Common.Domain;
+using Ecommerce.Data.Configurations;
 
 using JetBrains.Annotations;
 
@@ -12,6 +13,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection RegisterDomainDependencies(this IServiceCollection services)
     {
         return services
+            .RegisterDataDependencies()
             .AddSingleton(typeof(IAggregateWriterServiceFactory<,>), typeof(AggregateWriterServiceFactory<,>))
             .AddSingleton<IProductServiceFactory, ProductServiceFactory>();
     }

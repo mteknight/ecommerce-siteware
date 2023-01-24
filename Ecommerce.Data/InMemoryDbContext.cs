@@ -11,6 +11,10 @@ public class InMemoryDbContext : DbContext
     {
     }
 
+    public InMemoryDbContext()
+    {
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // Not happy with this hardcoded but will suffice for now!

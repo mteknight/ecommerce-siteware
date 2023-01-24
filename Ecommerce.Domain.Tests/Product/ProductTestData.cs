@@ -3,7 +3,7 @@
 using Ecommerce.Common.Extensions;
 using Ecommerce.Common.Tests;
 
-namespace Ecommerce.Domain.Tests.Product;
+namespace Ecommerce.Domain.Tests;
 
 public sealed record ProductTestData
 {
@@ -12,23 +12,12 @@ public sealed record ProductTestData
         var fixture = new Fixture();
 
         return TestData
-                .NewSet(new Domain.Product(default!, fixture.Create<decimal>()))
-                .NewSet(new Domain.Product(string.Empty, fixture.Create<decimal>()))
-                .NewSet(new Domain.Product(StringExtensions.Whitespace, fixture.Create<decimal>()))
-                .NewSet(new Domain.Product(fixture.Create<string>(), -1))
-                .NewSet(new Domain.Product(fixture.Create<string>(), -43.765m))
-                .NewSet(new Domain.Product(fixture.Create<string>(), decimal.MinValue))
-            ;
-    }
-
-    public static IEnumerable<object[]> ValidProductTestData()
-    {
-        var fixture = new Fixture();
-
-        return TestData
-                .NewSet(new Domain.Product(fixture.Create<string>(), fixture.Create<decimal>()) { PromotionType = IPromotion.PromotionType.NoPromotion })
-                .NewSet(new Domain.Product(fixture.Create<string>(), fixture.Create<decimal>()) { PromotionType = IPromotion.PromotionType.NoPromotion })
-                .NewSet(new Domain.Product(fixture.Create<string>(), fixture.Create<decimal>()) { PromotionType = IPromotion.PromotionType.NoPromotion })
+                .NewSet(new Product(default!, fixture.Create<decimal>()))
+                .NewSet(new Product(string.Empty, fixture.Create<decimal>()))
+                .NewSet(new Product(StringExtensions.Whitespace, fixture.Create<decimal>()))
+                .NewSet(new Product(fixture.Create<string>(), -1))
+                .NewSet(new Product(fixture.Create<string>(), -43.765m))
+                .NewSet(new Product(fixture.Create<string>(), decimal.MinValue))
             ;
     }
 
@@ -37,7 +26,7 @@ public sealed record ProductTestData
         var fixture = new Fixture();
 
         return TestData
-                .NewSet(new Domain.Product(fixture.Create<string>(), fixture.Create<decimal>()))
+                .NewSet(new Product(fixture.Create<string>(), fixture.Create<decimal>()) { Id = fixture.Create<Guid>() })
             ;
     }
 }

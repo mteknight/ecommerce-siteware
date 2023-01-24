@@ -4,10 +4,17 @@ using Ecommerce.Common.Domain;
 
 namespace Ecommerce.Domain;
 
-public sealed record ProductService : IAggregateWriterService<Product, ProductValidated>
+public interface IProductService : IAggregateRootService
+{
+    ProductValidated ValidatedAggregate { get; }
+
+    Guid Save();
+}
+
+public sealed record ProductService : IProductService
 {
     private readonly Product product;
-    private readonly IAggregateWriterServiceFactory<Product, ProductValidated> serviceFactory;
+    private readonly IAggregateWriterService<Product,ProductValidated> writerService;
     private ProductValidated? productValidated;
 
     internal ProductService(
@@ -15,7 +22,9 @@ public sealed record ProductService : IAggregateWriterService<Product, ProductVa
         IAggregateWriterServiceFactory<Product, ProductValidated> serviceFactory)
     {
         this.product = Guard.Argument(product, nameof(product)).NotNull().Value;
-        this.serviceFactory = Guard.Argument(serviceFactory, nameof(serviceFactory)).NotNull().Value;
+        Guard.Argument(serviceFactory, nameof(serviceFactory)).NotNull();
+        
+        this.writerService = serviceFactory.Create(this.ValidatedAggregate);
     }
 
     // ReSharper disable once ArrangeObjectCreationWhenTypeNotEvident => Evident enough.
@@ -23,7 +32,8 @@ public sealed record ProductService : IAggregateWriterService<Product, ProductVa
 
     public Guid Save()
     {
-        var service = this.serviceFactory.Create(this.ValidatedAggregate);
-        return service.Save();
+        var result = this.writerService.Save();
+
+        return result ? this.product.Id : Guid.Empty;
     }
 }

@@ -13,8 +13,5 @@ public sealed record ProductServiceFactory : IProductServiceFactory
         this.serviceFactory = Guard.Argument(serviceFactory, nameof(serviceFactory)).NotNull().Value;
     }
 
-    public IAggregateWriterService<Product, ProductValidated> Create(Product product)
-    {
-        return new ProductService(product, this.serviceFactory);
-    }
+    public IProductService Create(Product product) => new ProductService(product, this.serviceFactory);
 }

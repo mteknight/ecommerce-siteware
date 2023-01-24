@@ -23,18 +23,10 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="FluentAssertions" Version="6.9.0" />
-        <PackageReference Include="AutoFixture.AutoMoq" Version="4.17.0" />
-        <PackageReference Include="AutoFixture.Xunit2" Version="4.17.0" />
-        <PackageReference Include="Moq" Version="4.18.4" />
-        <PackageReference Include="Xunit.DependencyInjection" Version="8.7.0" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.2" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Ecommerce.Data\Ecommerce.Data.csproj" />
-      <ProjectReference Include="..\Ecommerce.Domain\Ecommerce.Domain.csproj" />
+      <ProjectReference Include="..\Ecommerce.Domain.Tests\Ecommerce.Domain.Tests.csproj" />
     </ItemGroup>
 
 </Project>

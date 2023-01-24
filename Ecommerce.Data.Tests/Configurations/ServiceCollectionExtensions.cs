@@ -1,5 +1,4 @@
 ﻿using Ecommerce.Data.Configurations;
-using Ecommerce.Domain.Tests.Configurations;
 
 using JetBrains.Annotations;
 
@@ -16,10 +15,9 @@ public static class ServiceCollectionExtensions
         var options = new DbContextOptionsBuilder<InMemoryDbContext>()
             .UseInMemoryDatabase(databaseName: "EcommerceDb")
             .Options;
-        
+
         return services
             .AddSingleton(typeof(DbContextOptions), options)
-            .RegisterDataDependencies()
-            .RegisterDomainTestDependencies();
+            .RegisterDataDependencies();
     }
 }
