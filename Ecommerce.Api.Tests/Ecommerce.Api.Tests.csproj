@@ -26,6 +26,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Ecommerce.Api\Ecommerce.Api.csproj" />
       <ProjectReference Include="..\Ecommerce.Domain.Tests\Ecommerce.Domain.Tests.csproj" />
     </ItemGroup>
 
