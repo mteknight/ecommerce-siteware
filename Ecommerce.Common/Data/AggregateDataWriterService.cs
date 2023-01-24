@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce.Common.Data;
 
-public record AggregateDataWriterService<TAggregateRoot, TAggregateValidated> 
+public record AggregateDataWriterService<TAggregateRoot, TAggregateValidated>
     : IAggregateDataWriterService<TAggregateRoot, TAggregateValidated>
     where TAggregateRoot : class, IAggregateRoot<TAggregateRoot>
     where TAggregateValidated : AggregateValidated<TAggregateRoot>
@@ -22,12 +22,20 @@ public record AggregateDataWriterService<TAggregateRoot, TAggregateValidated>
         this.readerService = Guard.Argument(readerService, nameof(readerService)).NotNull().Value;
     }
 
-    public virtual bool Add(TAggregateValidated productValidated)
+    public virtual async Task<bool> Add(
+        TAggregateValidated productValidated,
+        CancellationToken cancellationToken = default)
     {
-        this.context.Add<TAggregateRoot>(productValidated);
+        await this.context.AddAsync<TAggregateRoot>(productValidated, cancellationToken);
+        var changes = await this.context.SaveChangesAsync(cancellationToken);
 
-        return this.context.SaveChanges() > 0;
+        return changes > 0;
     }
 
-    public virtual TAggregateRoot? Get(Guid productId) => this.readerService.Get(productId);
+    public virtual ValueTask<TAggregateRoot?> Get(
+        Guid productId,
+        CancellationToken cancellationToken = default)
+    {
+        return this.readerService.Get(productId, cancellationToken);
+    }
 }

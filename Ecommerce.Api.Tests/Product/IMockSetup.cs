@@ -10,8 +10,8 @@ public interface IMockSetup
     {
         var mockedProductService = new Mock<IProductService>();
         mockedProductService
-            .Setup(service => service.Save())
-            .Returns(expectedId)
+            .Setup(service => service.Save(It.IsAny<CancellationToken>()))
+            .ReturnsAsync(expectedId)
             .Verifiable();
         
         return mockedProductService;
@@ -22,7 +22,7 @@ public interface IMockSetup
     {
         var mockedProductServiceFactory = new Mock<IProductServiceFactory>();
         mockedProductServiceFactory
-            .Setup(factory => factory.Create(It.IsAny<Domain.Product>()))
+            .Setup(factory => factory.Create(It.IsAny<Product>()))
             .Returns(mockedProductService.Object)
             .Verifiable();
         

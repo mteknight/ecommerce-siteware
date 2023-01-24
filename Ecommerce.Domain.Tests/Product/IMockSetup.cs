@@ -10,8 +10,8 @@ public interface IMockSetup
     {
         var mockedWriterService = new Mock<IAggregateWriterService<Product, ProductValidated>>();
         mockedWriterService
-            .Setup(service => service.Save())
-            .Returns(true)
+            .Setup(service => service.Save(It.IsAny<CancellationToken>()))
+            .ReturnsAsync(true)
             .Verifiable();
 
         return mockedWriterService;

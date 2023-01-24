@@ -18,7 +18,9 @@ public class ProductController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult<Guid> Add([FromBody] Product? product)
+    public async Task<ActionResult<Guid>> Add(
+        [FromBody] Product? product,
+        CancellationToken cancellationToken = default)
     {
         if (product is null)
         {
@@ -26,7 +28,7 @@ public class ProductController : ControllerBase
         }
 
         var service = this.productServiceFactory.Create(product);
-        var id = service.Save();
+        var id = await service.Save(cancellationToken);
 
         return this.Ok(id);
     }

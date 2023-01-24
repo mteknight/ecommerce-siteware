@@ -7,5 +7,5 @@ public interface IAggregateWriterService<TAggregateRoot, out TAggregateValidated
 {
     TAggregateValidated ValidatedAggregate { get; }
 
-    bool Save();
+    Task<bool> Save(CancellationToken cancellationToken = default);
 }

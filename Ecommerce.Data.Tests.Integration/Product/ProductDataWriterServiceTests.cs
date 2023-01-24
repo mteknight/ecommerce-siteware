@@ -20,14 +20,14 @@ public sealed record ProductDataWriterServiceTests
 
     [Theory]
     [MemberData(nameof(ProductTestData.ValidProductTestData), MemberType = typeof(ProductTestData))]
-    public void GivenValidProduct_WhenAddingNew_ThenReturnAddedProduct(Product product)
+    public async Task GivenValidProduct_WhenAddingNew_ThenReturnAddedProduct(Product product)
     {
         // Arrange
         var productValidated = new ProductValidated(product);
 
         // Act
-        var wasAdded = this.sut.Add(productValidated);
-        var newProduct = this.sut.Get(product.Id);
+        var wasAdded = await this.sut.Add(productValidated);
+        var newProduct = await this.sut.Get(product.Id);
 
         // Assert
         wasAdded.Should().BeTrue("The new product is expected to be added successfully.");

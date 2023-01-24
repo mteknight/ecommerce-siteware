@@ -24,9 +24,9 @@ public record AggregateWriterService<TAggregateRoot, TAggregateValidated>
 
     public TAggregateValidated ValidatedAggregate { get; }
 
-    public virtual bool Save()
+    public virtual async Task<bool> Save(CancellationToken cancellationToken = default)
     {
         return this.ValidatedAggregate.IsValid &&
-               this.dataWriterService.Add(this.ValidatedAggregate);
+               await this.dataWriterService.Add(this.ValidatedAggregate, cancellationToken);
     }
 }

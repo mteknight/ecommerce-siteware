@@ -1,4 +1,5 @@
-﻿using Ecommerce.Data.Tests.Configurations;
+﻿using Ecommerce.Data.Configurations;
+using Ecommerce.Data.Tests.Configurations;
 
 using JetBrains.Annotations;
 
@@ -12,6 +13,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection RegisterDataIntegrationTestDependencies(this IServiceCollection services)
     {
         return services
+            .RegisterDataDependencies()
             .RegisterDataTestDependencies();
     }
 }

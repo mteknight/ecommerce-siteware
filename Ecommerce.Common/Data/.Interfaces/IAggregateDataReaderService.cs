@@ -2,8 +2,10 @@
 
 namespace Ecommerce.Common.Data;
 
-public interface IAggregateDataReaderService<out TAggregateRoot>
+public interface IAggregateDataReaderService<TAggregateRoot>
     where TAggregateRoot : class, IAggregateRoot<TAggregateRoot>
 {
-    TAggregateRoot? Get(Guid productId);
+    ValueTask<TAggregateRoot?> Get(
+        Guid productId,
+        CancellationToken cancellationToken = default);
 }

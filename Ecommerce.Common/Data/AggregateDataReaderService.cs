@@ -16,8 +16,10 @@ public record AggregateDataReaderService<TAggregateRoot> : IAggregateDataReaderS
         this.context = Guard.Argument(context, nameof(context)).NotNull().Value;
     }
 
-    public virtual TAggregateRoot? Get(Guid productId)
+    public virtual ValueTask<TAggregateRoot?> Get(
+        Guid productId,
+        CancellationToken cancellationToken = default)
     {
-        return this.context.Find<TAggregateRoot>(productId);
+        return this.context.FindAsync<TAggregateRoot>(productId, cancellationToken);
     }
 }

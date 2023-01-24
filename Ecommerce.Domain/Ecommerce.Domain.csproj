@@ -16,6 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Compile Include="Product\.Interfaces\IProductService.cs" />
       <Compile Include="Product\.Interfaces\IProductServiceFactory.cs" />
     </ItemGroup>
 

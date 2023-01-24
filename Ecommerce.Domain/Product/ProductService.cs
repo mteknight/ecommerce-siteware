@@ -4,13 +4,6 @@ using Ecommerce.Common.Domain;
 
 namespace Ecommerce.Domain;
 
-public interface IProductService : IAggregateRootService
-{
-    ProductValidated ValidatedAggregate { get; }
-
-    Guid Save();
-}
-
 public sealed record ProductService : IProductService
 {
     private readonly Product product;
@@ -30,9 +23,9 @@ public sealed record ProductService : IProductService
     // ReSharper disable once ArrangeObjectCreationWhenTypeNotEvident => Evident enough.
     public ProductValidated ValidatedAggregate => this.productValidated ??= new(this.product);
 
-    public Guid Save()
+    public async Task<Guid> Save(CancellationToken cancellationToken = default)
     {
-        var result = this.writerService.Save();
+        var result = await this.writerService.Save(cancellationToken);
 
         return result ? this.product.Id : Guid.Empty;
     }

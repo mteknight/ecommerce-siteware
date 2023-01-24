@@ -14,7 +14,7 @@ public sealed record ProductServiceTests
 {
     [Theory]
     [AutoData]
-    public void GivenValidProduct_WhenAddingNew_ThenReturnNewProductId(Product product)
+    public async Task GivenValidProduct_WhenAddingNew_ThenReturnNewProductId(Product product)
     {
         // Arrange
         var mockedWriterService = IMockSetup.SetupMockedWriterService();
@@ -22,17 +22,17 @@ public sealed record ProductServiceTests
         var sut = GetProductService(product, mockedWriterServiceFactory.Object);
         
         // Act
-        var productId = sut.Save();
+        var productId = await sut.Save();
     
         // Assert
         productId.Should().NotBe(Guid.Empty, "The new id is expected when adding a new product");
         mockedWriterServiceFactory.Verify(factory => factory.Create(It.IsAny<ProductValidated>()), Times.Once);
-        mockedWriterService.Verify(service => service.Save(), Times.Once);
+        mockedWriterService.Verify(service => service.Save(It.IsAny<CancellationToken>()), Times.Once);
     }
 
     [Theory]
     [MemberData(nameof(ProductTestData.InvalidProductTestData), MemberType = typeof(ProductTestData))]
-    public void GivenInvalidProductName_WhenAddingNew_ThenSetInvalidAndReturnEmptyId(Product product)
+    public async Task GivenInvalidProductName_WhenAddingNew_ThenSetInvalidAndReturnEmptyId(Product product)
     {
         // Arrange
         var mockedWriterService = IMockSetup.SetupMockedWriterService();
@@ -40,18 +40,18 @@ public sealed record ProductServiceTests
         var sut = GetProductService(product, mockedWriterServiceFactory.Object);
         
         // Act
-        var productId = sut.Save();
+        var productId = await sut.Save();
     
         // Assert
         sut.ValidatedAggregate.IsValid.Should().BeFalse("Expected to be false when validation fails");
         productId.Should().Be(Guid.Empty, "No id should be returned when validation fails");
         mockedWriterServiceFactory.Verify(factory => factory.Create(It.IsAny<ProductValidated>()), Times.Once);
-        mockedWriterService.Verify(service => service.Save(), Times.Once);
+        mockedWriterService.Verify(service => service.Save(It.IsAny<CancellationToken>()), Times.Once);
     }
     
     [Theory]
     [AutoData]
-    public void GivenProductDiscount_WhenAddingNew_ThenReturnNewProductWithNoPromotion(Product product)
+    public async Task GivenProductDiscount_WhenAddingNew_ThenReturnNewProductWithNoPromotion(Product product)
     {
         // Arrange
         var mockedWriterService = IMockSetup.SetupMockedWriterService();
@@ -59,18 +59,18 @@ public sealed record ProductServiceTests
         var sut = GetProductService(product, mockedWriterServiceFactory.Object);
         
         // Act
-        var productId = sut.Save();
+        var productId = await sut.Save();
     
         // Assert
         product.Promotion.Should().NotBeNull("At least the default promotion (NoPromotion) is expected");
         productId.Should().NotBeEmpty("The new id is expected when adding a new product");
         mockedWriterServiceFactory.Verify(factory => factory.Create(It.IsAny<ProductValidated>()), Times.Once);
-        mockedWriterService.Verify(service => service.Save(), Times.Once);
+        mockedWriterService.Verify(service => service.Save(It.IsAny<CancellationToken>()), Times.Once);
     }
     
     [Theory]
     [MemberData(nameof(ProductTestData.ProductWithoutPromotionTestData), MemberType = typeof(ProductTestData))]
-    public void GivenProductWithoutPromotion_WhenAddingNew_ThenReturnNewProductWithNoPromotion(Product product)
+    public async Task GivenProductWithoutPromotion_WhenAddingNew_ThenReturnNewProductWithNoPromotion(Product product)
     {
         // Arrange
         var mockedWriterService = IMockSetup.SetupMockedWriterService();
@@ -78,13 +78,13 @@ public sealed record ProductServiceTests
         var sut = GetProductService(product, mockedWriterServiceFactory.Object);
     
         // Act
-        var productId = sut.Save();
+        var productId = await sut.Save();
     
         // Assert
         product.Promotion.Should().BeOfType(typeof(NoPromotion), "The default promotion (NoPromotion) is expected");
         productId.Should().NotBeEmpty("The new id is expected when adding a new product");
         mockedWriterServiceFactory.Verify(factory => factory.Create(It.IsAny<ProductValidated>()), Times.Once);
-        mockedWriterService.Verify(service => service.Save(), Times.Once);
+        mockedWriterService.Verify(service => service.Save(It.IsAny<CancellationToken>()), Times.Once);
     }
 
     private static IProductService GetProductService(
